@@ -8,3 +8,4 @@ declare module '*.vue' {
 }
 
 declare module 'nprogress'
+declare module '@caroundsky/el-plus-dialog-service'

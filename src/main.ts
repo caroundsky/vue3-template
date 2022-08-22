@@ -9,6 +9,7 @@ import { createPinia } from 'pinia'
 // 自定义nprogress样式
 import '@/utils/nprogress'
 import router from './router'
+import dialogService from '@caroundsky/el-plus-dialog-service'
 
 import App from './App.vue'
 
@@ -16,5 +17,7 @@ const app = createApp(App)
 
 app.use(router)
 app.use(createPinia())
+
+app.config.globalProperties.$dialogService = dialogService
 
 app.mount('#app')

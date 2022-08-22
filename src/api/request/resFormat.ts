@@ -14,15 +14,19 @@ const _validateResponse = (res: any) => {
   }
 }
 
-const _handleError = (res: any, defaultText?: string) => {
+const _handleError = (res: any, defaultMsg?: string) => {
   try {
-    return res.msg || res.message
+    return res.msg || res.message || defaultMsg
   } catch (error) {
-    return defaultText || null
+    return defaultMsg || null
   }
 }
 
-export default function (response: AxiosResponse, silent: boolean) {
+export default function (
+  response: AxiosResponse,
+  silent: boolean,
+  defaultMsg: string = '请求成功'
+) {
   const isBlob = response.config.responseType === 'blob'
   const res = isBlob ? response : response.data
   if (isBlob) {
@@ -30,7 +34,7 @@ export default function (response: AxiosResponse, silent: boolean) {
   }
 
   if (_validateResponse(res)) {
-    const msg = _handleError(res, '请求成功')
+    const msg = _handleError(res, defaultMsg)
     !silent && ElMessage.success(msg)
 
     return {

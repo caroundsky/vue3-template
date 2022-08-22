@@ -10,6 +10,13 @@ import resFormat from './resFormat'
 import appConfig from '@/app.config'
 import isPlainObject from 'lodash/isPlainObject'
 
+import { AxiosResponse } from 'axios'
+interface myRes {
+  success: boolean
+  result: any
+  msg: string
+}
+
 let requestCount = 0
 
 const REQUEST_TIMEOUT: number = appConfig.requestTimeout
@@ -37,6 +44,7 @@ const request = (_requestConfig: NormalizedApiConfig = {}) => {
     silent = false,
     transformResponse,
     cache,
+    defaultMsg,
     ...axiosRequestConfig
   } = _requestConfig
 
@@ -78,9 +86,9 @@ const request = (_requestConfig: NormalizedApiConfig = {}) => {
         NProgressDone()
       }
 
-      let resolveData
+      let resolveData: AxiosResponse<any, any> | myRes
       if (_formate) {
-        resolveData = resFormat(response, silent)
+        resolveData = resFormat(response, silent, defaultMsg)
       } else {
         resolveData = response.config.responseType === 'blob' ? response : response.data
       }
@@ -108,7 +116,7 @@ interface TemplateConfig extends NormalizedApiConfig {
   apiPrefix: NormalizedApiConfig
 }
 
-export default function templateRequest(config: TemplateConfig) {
+export default function templateRequest(config: TemplateConfig): Promise<any> {
   const { apiPrefix, ...options } = config
   const _service = request({ ...apiPrefix, ...options })
   return _service(config)

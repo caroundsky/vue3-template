@@ -39,6 +39,16 @@ export default defineConfig({
 
   css: {},
 
+  build: {
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'static/js/[name]-[hash].js',
+        entryFileNames: 'static/js/[name]-[hash].js',
+        assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+      }
+    }
+  },
+
   server: {
     port: 8080, // 指定端口号
     strictPort: false, // 设为 false 时，若端口已被占用则会尝试下一个可用端口,而不是直接退出

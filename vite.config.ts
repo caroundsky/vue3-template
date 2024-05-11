@@ -5,7 +5,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import progress from 'vite-plugin-progress'
 import AutoImport from 'unplugin-auto-import/vite'
 // https://github.com/element-plus/unplugin-element-plus
-import ElementPlus from 'unplugin-element-plus/vite'
+import * as ElementPlus from 'unplugin-element-plus/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 

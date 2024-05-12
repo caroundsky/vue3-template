@@ -4,7 +4,7 @@
   "type": "module",
   "version": "0.0.0",
   "scripts": {
-    "serve": "vite --mode development",
+    "serve": "vite --host --mode development",
     "build": "vue-tsc --noEmit && vite build",
     "build:dev": "vite build --mode development",
     "build:test": "vite build --mode test",
@@ -13,12 +13,15 @@
   },
   "dependencies": {
     "@caroundsky/el-plus-dialog-service": "^0.0.5",
+    "@lhlyu/vue-virtual-waterfall": "^1.0.5",
+    "@vueuse/core": "^10.9.0",
     "axios": "~0.21.1",
     "axios-cache-adapter": "^2.7.3",
     "element-plus": "^2.3.8",
     "less": "^4.1.3",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
+    "reset-css": "^5.0.2",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2"
   },

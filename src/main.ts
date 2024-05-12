@@ -5,7 +5,7 @@
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
+import '@/assets/style/index.less'
 // 自定义nprogress样式
 import '@/utils/nprogress'
 import router from './router'

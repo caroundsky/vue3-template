@@ -1,7 +1,7 @@
 import type { ApiConfig } from '~/types'
 
 const config: ApiConfig = {
-  main: '/proxy',
+  main: '/',
 }
 
 export default config

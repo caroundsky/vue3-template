@@ -13,3 +13,16 @@ export function getCurrentUser() {
     },
   })
 }
+
+export function getImages(data: {
+  pageIndex: number,
+  pageSize: number
+}) {
+  return templateRequest({
+    apiPrefix,
+    url: '/api/get-images',
+    method: 'post',
+    data,
+    silent: true
+  })
+}

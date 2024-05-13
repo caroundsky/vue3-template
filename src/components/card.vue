@@ -21,6 +21,14 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue'
 
+interface ItemOption {
+  id: number
+  title: string
+  url: string
+  width: number
+  height: number
+}
+
 const props = withDefaults(
   defineProps<{
     item: ItemOption

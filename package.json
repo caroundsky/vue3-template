@@ -22,6 +22,8 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
     "reset-css": "^5.0.2",
+    "v-viewer": "^3.0.11",
+    "viewerjs": "^1.11.6",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2"
   },

@@ -1,13 +1,14 @@
 import { reactive, render, h } from "vue"
 import Card from "./card.vue"
-import { getImages } from '@/api/main'
+import { getImages } from "@/api/main"
 
 interface ItemOption {
   id: number
-  title: string
+  name: string
   url: string
   width: number
   height: number
+  desc: string
 }
 
 // 计算真实高度，这里只计算除了图片的高度
@@ -39,7 +40,7 @@ const useWaterfall = () => {
     window.scrollTo({
       top: 0,
       // @ts-ignore
-      behavior: 'instant'
+      behavior: "instant",
     })
   }
 
@@ -54,9 +55,9 @@ const useWaterfall = () => {
     virtual: true,
     gap: 15,
     padding: 15,
-    itemMinWidth: 220,
+    itemMinWidth: 260,
     minColumnCount: 2,
-    maxColumnCount: 10
+    maxColumnCount: 10,
   })
 
   // 瀑布流元素高度的计算函数
@@ -73,7 +74,7 @@ const useWaterfall = () => {
   // 需要展示数据的属性
   const data = reactive({
     page: 0,
-    size: 30,
+    size: 100,
     total: 0,
     max: 0,
     list: [] as ItemOption[],
@@ -88,23 +89,25 @@ const useWaterfall = () => {
       return
     }
     data.page += 1
-    const { result } = await getImages({ pageIndex: data.page, pageSize: data.size })
+    const { result } = await getImages({
+      pageIndex: data.page,
+      pageSize: data.size,
+    })
     if (!result.length) {
       data.end = true
       waterfallOption.loading = false
       return
     }
     data.total = result.length
+    if (result.length < data.size) {
+      data.end = true
+    }
 
     const list: ItemOption[] = []
 
     for (let i = 0; i < result.length; i++) {
       list.push({
-        id: result[i].id,
-        title: result[i].name,
-        url: result[i].url,
-        width: result[i].width,
-        height: result[i].height,
+        ...result[i]
       })
     }
 
@@ -115,7 +118,7 @@ const useWaterfall = () => {
   // 检查是否加载更多
   const checkScrollPosition = async () => {
     if (waterfallOption.loading) {
-        return
+      return
     }
 
     const scrollHeight = document.documentElement.scrollHeight
@@ -126,9 +129,9 @@ const useWaterfall = () => {
 
     // 不大于最小底部距离就加载更多
     if (distanceFromBottom <= waterfallOption.bottomDistance) {
-        waterfallOption.loading = true
-        await loadData()
-        waterfallOption.loading = false
+      waterfallOption.loading = true
+      await loadData()
+      waterfallOption.loading = false
     }
 
     requestAnimationFrame(checkScrollPosition)
@@ -137,7 +140,6 @@ const useWaterfall = () => {
   onMounted(async () => {
     await checkScrollPosition()
   })
-
 
   return {
     backTop,

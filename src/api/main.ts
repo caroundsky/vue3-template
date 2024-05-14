@@ -26,3 +26,12 @@ export function getImages(data: {
     silent: true
   })
 }
+
+export function getTag() {
+  return templateRequest({
+    apiPrefix,
+    url: '/api/get-tag',
+    method: 'get',
+    silent: true
+  })
+}

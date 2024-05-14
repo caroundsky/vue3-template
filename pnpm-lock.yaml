@@ -35,6 +35,12 @@ dependencies:
   reset-css:
     specifier: ^5.0.2
     version: 5.0.2
+  v-viewer:
+    specifier: ^3.0.11
+    version: 3.0.11(vue@3.4.27)
+  viewerjs:
+    specifier: ^1.11.6
+    version: 1.11.6
   vue:
     specifier: ^3.4.27
     version: 3.4.27(typescript@5.2.2)
@@ -3487,6 +3493,16 @@ packages:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
 
+  /v-viewer@3.0.11(vue@3.4.27):
+    resolution: {integrity: sha512-E8LOdAxhzuktt4HB3PswVCccQ1Q1sYHYnLsS6zaJISpb5EvmAFs5sYNfXnDLFxVb5DQ82v4ZlGxkYlseXwWRJw==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      lodash: 4.17.21
+      viewerjs: 1.11.6
+      vue: 3.4.27(typescript@5.2.2)
+    dev: false
+
   /v8-compile-cache@2.4.0:
     resolution: {integrity: sha512-ocyWc3bAHBB/guyqJQVI5o4BZkPhznPYUG2ea80Gond/BgNWpap8TOmLSeeQG7bnh2KMISxskdADG59j7zruhw==}
     dev: true
@@ -3497,6 +3513,10 @@ packages:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
     dev: true
+
+  /viewerjs@1.11.6:
+    resolution: {integrity: sha512-TlhdSp2oEOLFXvEp4psKaeTjR5zBjTRcM/sHUN8PkV1UWuY8HKC8n7GaVdW5Xqnwdr/F1OmzLik1QwDjI4w/nw==}
+    dev: false
 
   /vite-plugin-progress@0.0.7(vite@5.2.11):
     resolution: {integrity: sha512-zyvKdcc/X+6hnw3J1HVV1TKrlFKC4Rh8GnDnWG/2qhRXjqytTcM++xZ+SAPnoDsSyWl8O93ymK0wZRgHAoglEQ==}

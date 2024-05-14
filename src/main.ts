@@ -10,13 +10,14 @@ import '@/assets/style/index.less'
 import '@/utils/nprogress'
 import router from './router'
 import dialogService from '@caroundsky/el-plus-dialog-service'
-
+import VueViewer from 'v-viewer'
 import App from './App.vue'
 
 const app = createApp(App)
 
 app.use(router)
 app.use(createPinia())
+app.use(VueViewer)
 
 app.config.globalProperties.$dialogService = dialogService
 

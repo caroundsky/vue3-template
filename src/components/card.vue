@@ -2,31 +2,27 @@
   <article class="card" :data-id="item.id">
     <div class="cover" v-if="!noImage">
       <Transition>
-        <img v-if="loaded" :src="item.url" alt="图片" />
+        <img v-if="loaded" :src="item.url" alt="图片" @click="() => show(item.url)" />
       </Transition>
     </div>
-    <!-- <div class="body" v-if="!onlyImage">
-      <h3>{{ item.title }}</h3>
-      <div class="author">
-        <div class="avatar">
-          <img :src="item.avatar" :alt="item.user" />
-          <span>{{ item.user }}</span>
-        </div>
-        <div class="views">❤️ {{ item.views > 999 ? '999+' : item.views }}</div>
-      </div>
-    </div> -->
+    <div class="body" v-if="!onlyImage">
+      <h3>{{ item.name }}</h3>
+      <p :title="item.desc">{{ item.desc }}</p>
+    </div>
   </article>
 </template>
 
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue'
+import { api as viewerApi } from "v-viewer"
 
 interface ItemOption {
   id: number
-  title: string
+  name: string
   url: string
   width: number
   height: number
+  desc: string
 }
 
 const props = withDefaults(
@@ -35,11 +31,13 @@ const props = withDefaults(
     onlyImage?: boolean
     noImage?: boolean
     width?: string
+    desc?: string
   }>(),
   {
     onlyImage: false,
     noImage: false,
-    width: '100%'
+    width: '100%',
+    desc: ''
   }
 )
 
@@ -67,6 +65,12 @@ onBeforeMount(() => {
     })
   }
 })
+
+function show(url: string) {
+  viewerApi({
+    images: [url]
+  })
+}
 </script>
 
 <style scoped lang="less">
@@ -91,6 +95,7 @@ onBeforeMount(() => {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      cursor: pointer;
     }
   }
 
@@ -99,6 +104,7 @@ onBeforeMount(() => {
     box-sizing: border-box;
     height: fit-content;
     padding: 12px;
+    text-align: left;
 
     h3 {
       margin: 0;
@@ -107,39 +113,13 @@ onBeforeMount(() => {
       font-size: 14px;
     }
 
-    .author {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 8px;
-
-      .avatar {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-
-        img {
-          width: 20px;
-          height: 20px;
-          object-fit: cover;
-          border-radius: 50%;
-        }
-
-        span {
-          margin-left: 4px;
-          overflow: hidden;
-          color: #333333;
-          font-size: 12px;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
-      }
-
-      .views {
-        color: #333333;
-        font-size: 12px;
-      }
+    p {
+      font-size: 13px;
+      color: #333;
+      margin-top: 10px;
+      overflow: hidden; 
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }

@@ -1,7 +1,7 @@
 import type { NormalizedApiConfig, ApiConfig } from '~/types'
 
-import isPlainObject from 'lodash/isPlainObject'
-import isString from 'lodash/isString'
+import { isPlainObject } from 'lodash-es'
+import { isString } from 'lodash-es'
 import devConfig from './env-dev'
 import testConfig from './env-test'
 import prodConfig from './env-prod'
@@ -24,6 +24,7 @@ function _normalizeApiConfig(config: ApiConfig) {
   Object.entries(config).forEach(([platform, config]) => {
     let normalizedConfig: NormalizedApiConfig = {}
     if (isString(config)) {
+      // @ts-ignore
       normalizedConfig = { baseURL: config }
     } else if (isPlainObject(config)) {
       normalizedConfig = config as NormalizedApiConfig

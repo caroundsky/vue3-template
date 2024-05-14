@@ -8,7 +8,7 @@ import NProgress from 'nprogress'
 import resFormat from './resFormat'
 
 import appConfig from '@/app.config'
-import isPlainObject from 'lodash/isPlainObject'
+import {isPlainObject} from 'lodash-es'
 
 import { AxiosResponse } from 'axios'
 interface myRes {
@@ -81,12 +81,12 @@ const request = (_requestConfig: NormalizedApiConfig = {}) => {
 
   // 添加响应拦截器
   service.interceptors.response.use(
-    (response) => {
+    (response): any => {
       if (REQUEST_LOADING) {
         NProgressDone()
       }
 
-      let resolveData: AxiosResponse<any, any> | myRes
+      let resolveData: AxiosResponse<any> | myRes
       if (_formate) {
         resolveData = resFormat(response, silent, defaultMsg)
       } else {

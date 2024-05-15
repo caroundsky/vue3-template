@@ -2,12 +2,15 @@
   <article class="card" :data-id="item.id">
     <div class="cover" v-if="!noImage">
       <Transition>
-        <img v-if="loaded" :src="item.url" alt="图片" @click="() => show(item.url)" />
+        <img v-if="loaded" :src="item.url" alt="图片" @click="() => show(item)" />
       </Transition>
     </div>
     <div class="body" v-if="!onlyImage">
-      <h3>{{ item.name }}</h3>
-      <p :title="item.desc">{{ item.desc }}</p>
+      <h3>
+        {{ item.name }}
+        <span>{{ item.time_range }}</span>
+      </h3>
+      <p v-if="item.desc" :title="item.desc">{{ item.desc }}</p>
     </div>
   </article>
 </template>
@@ -23,6 +26,7 @@ interface ItemOption {
   width: number
   height: number
   desc: string
+  time_range: string
 }
 
 const props = withDefaults(
@@ -66,9 +70,15 @@ onBeforeMount(() => {
   }
 })
 
-function show(url: string) {
+function show({ url, name }: any) {
   viewerApi({
-    images: [url]
+    images: [url],
+    options: {
+      zoomRatio: 0.3,
+      title: (image: any, imageData: any) => {
+        return `${name} (${imageData.naturalWidth} × ${imageData.naturalHeight})`
+      }
+    }
   })
 }
 </script>
@@ -107,10 +117,17 @@ function show(url: string) {
     text-align: left;
 
     h3 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin: 0;
       padding: 0;
       font-weight: bolder;
       font-size: 14px;
+      span {
+        font-size: 12px;
+        color: #666;
+      }
     }
 
     p {

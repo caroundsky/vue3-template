@@ -48,8 +48,6 @@ onMounted(() => {
   background: radial-gradient(circle farthest-corner at center top, #f7fffc 0, #eef3fb 100%);
 
   &>div {
-    max-width: 1300px;
-    min-width: 800px;
     width: 85%;
     margin: 0 auto;
   }
@@ -70,5 +68,13 @@ onMounted(() => {
 
 .caround-images {
   flex: 1;
+}
+
+@media only screen and (max-width: 600px) {
+  .caround-wrap {
+    &>div {
+      width: 100%;
+    }
+  }
 }
 </style>

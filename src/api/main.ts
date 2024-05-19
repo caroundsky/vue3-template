@@ -15,14 +15,22 @@ export function getCurrentUser() {
 }
 
 export function getImages(data: {
-  pageIndex: number,
+  pageIndex: number
   pageSize: number
+  tag?: number
+  order?: string
 }) {
+  const _data = JSON.parse(JSON.stringify(data))
+  Object.keys(_data).forEach(key => {
+    if (['', -1].includes(_data[key])) {
+      delete _data[key]
+    }
+  })
   return templateRequest({
     apiPrefix,
     url: '/api/get-images',
     method: 'post',
-    data,
+    data: _data,
     silent: true
   })
 }

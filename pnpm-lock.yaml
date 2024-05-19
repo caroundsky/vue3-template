@@ -8,6 +8,9 @@ dependencies:
   '@caroundsky/el-plus-dialog-service':
     specifier: ^0.0.5
     version: 0.0.5(element-plus@2.3.8)(vue@3.4.27)
+  '@element-plus/icons-vue':
+    specifier: ^2.3.1
+    version: 2.3.1(vue@3.4.27)
   '@lhlyu/vue-virtual-waterfall':
     specifier: ^1.0.5
     version: 1.0.5(vue@3.4.27)

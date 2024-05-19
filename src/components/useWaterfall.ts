@@ -9,6 +9,7 @@ interface ItemOption {
   width: number
   height: number
   desc: string
+  time_range: string
 }
 
 // 计算真实高度，这里只计算除了图片的高度
@@ -53,8 +54,8 @@ const useWaterfall = () => {
     topPreloadScreenCount: 0,
     bottomPreloadScreenCount: 10,
     virtual: true,
-    gap: 15,
-    padding: 15,
+    gap: 10,
+    padding: 20,
     itemMinWidth: 260,
     minColumnCount: 2,
     maxColumnCount: 10,
@@ -76,10 +77,18 @@ const useWaterfall = () => {
     page: 0,
     size: 100,
     total: 0,
-    max: 0,
     list: [] as ItemOption[],
     end: false,
+    order: '',
+    tag: -1
   })
+
+  function reset() {
+    data.page = 0
+    data.total = 0
+    data.end = false
+    data.list = []
+  }
 
   // 加载更多数据的函数
   const loadData = async () => {
@@ -92,6 +101,8 @@ const useWaterfall = () => {
     const { result } = await getImages({
       pageIndex: data.page,
       pageSize: data.size,
+      tag: data.tag,
+      order: data.order
     })
     if (!result.length) {
       data.end = true
@@ -145,6 +156,7 @@ const useWaterfall = () => {
     backTop,
     waterfallOption,
     data,
+    reset,
     calcItemHeight,
   }
 }
